@@ -50,7 +50,7 @@ class Direction(startX: Float, startY: Float, x:Float, y: Float) {
             return (posTarget[0] + targetView.width - player.width/2).toFloat()
         }
         else{
-            return (posTarget[1] + player.height/2).toFloat()
+            return (posTarget[1] + targetView.height-player.height).toFloat()
         }
     }
     fun getMinValue(targetView: View, player: View): Float

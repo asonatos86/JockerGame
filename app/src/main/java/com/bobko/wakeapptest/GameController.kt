@@ -64,10 +64,8 @@ class GameController(var context: Context, var gameField: TableLayout, var playe
     }
     fun restart(level: IntArray)
     {
-        levelField[5][2].getLocationOnScreen(startPosition)
         flingAnimation.cancel()
-        player.x=startPosition[0].toFloat()+player.width/2
-        player.y=startPosition[1].toFloat()
+        setPlayerLocation()
         loadLevel(level)
     }
     fun move(direction: Direction)
@@ -77,16 +75,16 @@ class GameController(var context: Context, var gameField: TableLayout, var playe
         flingAnimation = FlingAnimation(player, direction.getAxis())
         flingAnimation.setStartVelocity(direction.getDirection())
         flingAnimation.friction = 0.001f
+        debug(direction)
         flingAnimation.setMaxValue(direction.getMaxValue(targetCell, player))
         flingAnimation.setMinValue(direction.getMinValue(targetCell, player))
-
         flingAnimation.addEndListener {_, canseld, _, _ -> flingAnimation?.let {if (!canseld) outOfCell(direction)}}
         flingAnimation.start()
     }
     fun setPlayerLocation()
     {
         levelField[5][2].getLocationOnScreen(startPosition)
-        player.x=startPosition[0].toFloat()+player.width/2
+        player.x=startPosition[0].toFloat()+targetCell.width/2-player.width/2
         player.y=startPosition[1].toFloat()
     }
     private fun outOfCell(direction: Direction)
@@ -193,5 +191,13 @@ class GameController(var context: Context, var gameField: TableLayout, var playe
                 }
             })
 
+    }
+    private fun debug(direction: Direction)
+    {
+        var asd = IntArray (2)
+        var zxc = IntArray(2)
+        targetCell.getLocationOnScreen(zxc)
+        player.getLocationOnScreen(asd)
+        Log.d("logger",direction.getMaxValue(targetCell, player).toString()+" "+direction.getMinValue(targetCell, player)+" "+zxc[1]+" "+asd[1])
     }
 }
