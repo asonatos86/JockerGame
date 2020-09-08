@@ -3,6 +3,7 @@ package com.bobko.wakeapptest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TableLayout
@@ -81,6 +82,12 @@ class GameController(var context: Context, var gameField: TableLayout, var playe
 
         flingAnimation.addEndListener {_, canseld, _, _ -> flingAnimation?.let {if (!canseld) outOfCell(direction)}}
         flingAnimation.start()
+    }
+    fun setPlayerLocation()
+    {
+        levelField[5][2].getLocationOnScreen(startPosition)
+        player.x=startPosition[0].toFloat()+player.width/2
+        player.y=startPosition[1].toFloat()
     }
     private fun outOfCell(direction: Direction)
     {

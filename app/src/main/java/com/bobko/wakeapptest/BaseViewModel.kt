@@ -32,4 +32,8 @@ class BaseViewModel : ViewModel()
     {
         gameController.restart(level)
     }
+    fun setPlayerLocation()
+    {
+        gameController.setPlayerLocation()
+    }
 }

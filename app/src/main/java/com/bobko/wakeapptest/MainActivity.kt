@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private var startX: Float = 0.0f
     private var startY: Float = 0.0f
 
-
     private lateinit var viewModel: BaseViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,4 +73,8 @@ class MainActivity : AppCompatActivity() {
        return false;
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        viewModel.setPlayerLocation()
+    }
 }
